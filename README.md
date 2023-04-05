@@ -2,7 +2,7 @@ A script for modifying GitKraken app to allow launching GitKraken in multiple wi
 
 **Tested on macOS for GitKraken 8.2.1**
 
-Copy & paste this script into Terminal and press enter:
+Copy & paste following script into Terminal and press enter:
 
 ```bash
 # Close GitKraken
