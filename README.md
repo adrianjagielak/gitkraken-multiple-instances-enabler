@@ -20,6 +20,9 @@ npx --yes electron/asar extract /Applications/GitKraken.app/Contents/Resources/a
 echo "Remove single instance check in main.bundle.js"
 sed -i '' 's/ne.requestSingleInstanceLock()||process.exit(0),//g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 
+echo "Remove GitKraken window width restriction"
+sed -i '' 's/minWidth:1024,/minWidth:100,/g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
+
 echo "Re-pack app.asar"
 npx --yes electron/asar pack /Applications/GitKraken.app/Contents/Resources/app-extracted /Applications/GitKraken.app/Contents/Resources/app-patched.asar
 
