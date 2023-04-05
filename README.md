@@ -5,31 +5,31 @@ A script for modifying GitKraken app to allow launching GitKraken in multiple wi
 Copy & paste following script into Terminal and press enter:
 
 ```bash
-# Close GitKraken
+echo "Close GitKraken"
 killall GitKraken
 
-# Make a backup of app.asar
+echo "Make a backup of app.asar"
 cp /Applications/GitKraken.app/Contents/Resources/app.asar /Applications/GitKraken.app/Contents/Resources/app-backup.asar
 
-# Install dependencies
+echo "Install dependencies"
 brew install node
 
-# Unpack app.asar
+echo "Unpack app.asar"
 npx --yes electron/asar extract /Applications/GitKraken.app/Contents/Resources/app.asar /Applications/GitKraken.app/Contents/Resources/app-extracted
 
-# Remove single instance check in main.bundle.js
+echo "Remove single instance check in main.bundle.js"
 sed -i '' 's/ne.requestSingleInstanceLock()||process.exit(0),//g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 
-# Re-pack app.asar
+echo "Re-pack app.asar"
 npx --yes electron/asar pack /Applications/GitKraken.app/Contents/Resources/app-extracted /Applications/GitKraken.app/Contents/Resources/app-patched.asar
 
-# Replace app.asar with patched app-patched.asar
+echo "Replace app.asar with patched app-patched.asar"
 mv /Applications/GitKraken.app/Contents/Resources/app-patched.asar /Applications/GitKraken.app/Contents/Resources/app.asar
 
-# Cleanup (delete extracted copy of app)
+echo "Cleanup (delete extracted copy of app)"
 rm -rf /Applications/GitKraken.app/Contents/Resources/app-extracted
 
-# Open two instances of GitKraken
+echo "Open two instances of GitKraken"
 open -n /Applications/GitKraken.app
 open -n /Applications/GitKraken.app
 ```
