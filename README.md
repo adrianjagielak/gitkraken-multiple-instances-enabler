@@ -1,40 +1,42 @@
-A script for modifying GitKraken app to allow launching GitKraken in multiple windows/instances.
+A script for modifying GitKraken app to allow launching GitKraken in multiple windows/instances and removing the minimum width restriction of GitKraken window.
 
 **Tested on macOS for GitKraken 8.2.1**
 
 Copy & paste following script into Terminal and press enter:
 
 ```bash
-echo "Close GitKraken"
+echo "Closing GitKraken..."
 killall GitKraken
 
-echo "Make a backup of app.asar"
+echo "Creating a backup of app.asar..."
 cp /Applications/GitKraken.app/Contents/Resources/app.asar /Applications/GitKraken.app/Contents/Resources/app-backup.asar
 
-echo "Install dependencies"
+echo "Installing dependencies..."
 brew install node
 
-echo "Unpack app.asar"
+echo "Unpacking app.asar..."
 npx --yes electron/asar extract /Applications/GitKraken.app/Contents/Resources/app.asar /Applications/GitKraken.app/Contents/Resources/app-extracted
 
-echo "Remove single instance check in main.bundle.js"
+echo "Removing single instance check in main.bundle.js..."
 sed -i '' 's/ne.requestSingleInstanceLock()||process.exit(0),//g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 
-echo "Remove GitKraken window width restriction"
+echo "Removing window width restriction..."
 sed -i '' 's/minWidth:1024,/minWidth:100,/g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 
-echo "Re-pack app.asar"
+echo "Re-packing app.asar..."
 npx --yes electron/asar pack /Applications/GitKraken.app/Contents/Resources/app-extracted /Applications/GitKraken.app/Contents/Resources/app-patched.asar
 
-echo "Replace app.asar with patched app-patched.asar"
+echo "Replacing app.asar with patched app-patched.asar..."
 mv /Applications/GitKraken.app/Contents/Resources/app-patched.asar /Applications/GitKraken.app/Contents/Resources/app.asar
 
-echo "Cleanup (delete extracted copy of app)"
+echo "Cleanup (deleting extracted copy of app)..."
 rm -rf /Applications/GitKraken.app/Contents/Resources/app-extracted
 
-echo "Open two instances of GitKraken"
+echo "Opening two instances of GitKraken..."
 open -n /Applications/GitKraken.app
 open -n /Applications/GitKraken.app
+
+echo "Done"
 ```
 
 You can open additional instances of GitKraken using `open -n /Applications/GitKraken.app` Terminal command.
