@@ -39,4 +39,4 @@ open -n /Applications/GitKraken.app
 echo "Done"
 ```
 
-You can open additional instances of GitKraken using `open -n /Applications/GitKraken.app` Terminal command.
+You can open additional instances of GitKraken using `open -n /Applications/GitKraken.app` Terminal command or by duplicating GitKraken.app (e.g. "GitKraken 1", "GitKraken 2" etc)
