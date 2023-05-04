@@ -18,7 +18,6 @@ echo "Unpacking app.asar..."
 npx --yes electron/asar extract /Applications/GitKraken.app/Contents/Resources/app.asar /Applications/GitKraken.app/Contents/Resources/app-extracted
 
 echo "Removing single instance check in main.bundle.js..."
-sed -i '' 's/async requestSingleInstanceLock(I={}){/async requestSingleInstanceLock(I={}){return true;/g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 sed -i '' 's/async requestSingleInstanceLock(/async requestSingleInstanceLock(I={}){return true;}async requestSingleInstanceLockOriginal(/g' /Applications/GitKraken.app/Contents/Resources/app-extracted/src/main/static/main.bundle.js
 
 echo "Removing window width restriction..."
