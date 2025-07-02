@@ -1,6 +1,6 @@
 A script for modifying GitKraken app to allow launching GitKraken in multiple windows/instances and removing the minimum width restriction of GitKraken window.
 
-**Tested on macOS for GitKraken 9.3.0**
+**Tested on macOS for GitKraken [11.2](https://github.com/adrianjagielak/gitkraken-multiple-instances-enabler/issues/1)**
 
 Copy & paste following script into Terminal and press enter:
 
