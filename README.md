@@ -41,7 +41,7 @@ open -n /Applications/GitKraken.app
 echo "Done"
 ```
 
-### Linux
+### Linux (by [curtisbelt](https://github.com/curtisbelt))
 
 ```bash
 echo "Closing GitKraken..."
