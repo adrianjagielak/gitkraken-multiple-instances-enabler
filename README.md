@@ -43,7 +43,7 @@ echo "Done"
 
 ### Linux
 
-```
+```bash
 echo "Closing GitKraken..."
 killall gitkraken
 
